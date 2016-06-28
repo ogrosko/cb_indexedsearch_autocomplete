@@ -24,5 +24,5 @@
      "replace": {
         "cb_indexedsearch_autocomplete": "self.version",
         "ogrosko/cb_indexedsearch_autocomplete": "self.version"
-    },
+    }
 }
