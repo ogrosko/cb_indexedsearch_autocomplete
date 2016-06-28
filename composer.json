@@ -1,0 +1,13 @@
+{
+    "name": "ogrosko/cb_indexedsearch_autocomplete",
+    "description": "Forked extension from https://github.com/PIT-Solutions-Private-Limited/cb_indexedsearch_autocomplete",
+    "type": "typo3-cms-extension",
+    "authors": [
+        {
+            "name": "Ondrej Grosko",
+            "email": "ogrosko@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}

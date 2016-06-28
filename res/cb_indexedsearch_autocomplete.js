@@ -26,7 +26,7 @@ jQuery.indexedsearchAutocomplete = function(input, options) {
 	});
 	
 	// Lets see if we can find it
-	var readWidth = parseInt(jQuery("input[name='tx_indexedsearch[sword]']").get(0).clientWidth);
+	var readWidth = parseInt($input.get(0).clientWidth);
 
 	if(readWidth > 0) {
 		$results.css({
@@ -395,5 +395,12 @@ jQuery.fn.indexedsearchAutocomplete = function(url, options) {
 }
 
 jQuery(document).ready(function() {
-	jQuery("input[name='tx_indexedsearch[sword]']").indexedsearchAutocomplete("http://" + top.location.host + top.location.pathname + "?eID=cb_indexedsearch_autocomplete&sr=" + sr + "&sh=" + sh + "" + "&ll=" + ll, { minChars:3, matchSubset:1, matchContains:1, cacheLength:10, selectOnly:1 });
+	if (jQuery("input[name='tx_indexedsearch_pi2[search][sword]']").length) {
+		var $input = jQuery("input[name='tx_indexedsearch_pi2[search][sword]']");
+	}
+	else {
+		var $input = jQuery("input[name='tx_indexedsearch[sword]']");
+	}
+	
+	$input.indexedsearchAutocomplete(top.location.origin + top.location.pathname + "?eID=cb_indexedsearch_autocomplete&sr=" + sr + "&sh=" + sh + "" + "&ll=" + ll, { minChars:3, matchSubset:1, matchContains:1, cacheLength:10, selectOnly:1 });
 });
