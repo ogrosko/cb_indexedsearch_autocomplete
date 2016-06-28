@@ -9,5 +9,11 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {}
+    "require": {},
+    "autoload": {
+        "classmap": [
+            "pi1/fe_index.php",
+            "pi1/class.tx_cb_indexedsearch_autocomplete_pi1.php"
+        ]
+    },
 }
