@@ -12,8 +12,17 @@
     "require": {},
     "autoload": {
         "classmap": [
-            "pi1/fe_index.php",
-            "pi1/class.tx_cb_indexedsearch_autocomplete_pi1.php"
+            ""
+        ],
+        "exclude-from-classmap": [
+            "Migrations",
+            "Tests",
+            "tests",
+            "class.ext_update.php"
         ]
-    }
+    },
+     "replace": {
+        "cb_indexedsearch_autocomplete": "self.version",
+        "ogrosko/cb_indexedsearch_autocomplete": "self.version"
+    },
 }
