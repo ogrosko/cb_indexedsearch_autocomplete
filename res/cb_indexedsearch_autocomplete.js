@@ -21,16 +21,16 @@ jQuery.indexedsearchAutocomplete = function(input, options) {
 
 	$results.hide().addClass(options.resultsClass).css({
 		position: "absolute",
-		top: (pos.y + input.offsetHeight) + "px",
-		left: pos.x + "px"
+		top: ~~(pos.top + $input.outerHeight()) + "px",
+		left: ~~pos.left + "px"
 	});
 	
 	// Lets see if we can find it
-	var readWidth = parseInt($input.get(0).clientWidth);
-
-	if(readWidth > 0) {
+	var readWidth = $input.outerWidth();
+	
+	if(parseFloat(readWidth) > 0) {
 		$results.css({
-				width: readWidth + "px"
+				width: readWidth
 		});
 	} 
 	
@@ -81,11 +81,11 @@ jQuery.indexedsearchAutocomplete = function(input, options) {
 		if (v == prev) return;
 		prev = v;
 		if (v.length >= options.minChars) {
-			$input.addClass(options.loadingClass);
+			$input.addClass(options.activeClass, options.loadingClass);
 			requestData(v);
 		} else {
-			$input.removeClass(options.loadingClass);
 			$results.hide();
+			$input.removeClass(options.loadingClass, options.activeClass);
 		}
 	};
 
@@ -163,6 +163,7 @@ jQuery.indexedsearchAutocomplete = function(input, options) {
 				selectItem(null);
 			}
 		}
+		$input.removeClass(options.activeClass);
 	};
 
 	function receiveData(q, data) {
@@ -240,15 +241,22 @@ jQuery.indexedsearchAutocomplete = function(input, options) {
 		return ul;
 	};
 
-	function resetSize(ul)
-	{
-		var tempList = ul.cloneNode(true);
-		jQuery(tempList).css('display', 'none');
-		jQuery("body").get(0).appendChild(tempList);
-		var widthNeeded = jQuery(tempList).width();
-		jQuery("body").get(0).removeChild(tempList);
-		jQuery(ul).width(widthNeeded);
-		$results.width(widthNeeded);
+	function resetSize(ul) {		
+		var readWidth = $input.outerWidth();
+
+		if(parseFloat(readWidth) > 0) {
+			$results.css({
+				width: readWidth
+			});
+		} else {
+			var tempList = ul.cloneNode(true);
+			jQuery(tempList).css('display', 'none');
+			jQuery("body").get(0).appendChild(tempList);
+			var widthNeeded = jQuery(tempList).width();
+			jQuery("body").get(0).removeChild(tempList);
+			jQuery(ul).width(widthNeeded);
+			$results.width(widthNeeded);
+		}
 	}
 
 	function requestData(q) {
@@ -323,13 +331,7 @@ jQuery.indexedsearchAutocomplete = function(input, options) {
 	};
 
 	function findPos(obj) {
-		var curleft = obj.offsetLeft || 0;
-		var curtop = obj.offsetTop || 0;
-		while (obj = obj.offsetParent) {
-			curleft += obj.offsetLeft
-			curtop += obj.offsetTop
-		}
-		return {x:curleft,y:curtop};
+		return jQuery(obj).offset();
 	}
 
 	function onItemSelect(li) {	
@@ -365,6 +367,7 @@ jQuery.fn.indexedsearchAutocomplete = function(url, options) {
 	// Set default values for required options
 	options.inputClass = options.inputClass || "ac_input";
 	options.resultsClass = options.resultsClass || "ac_results";
+	options.activeClass = options.activeClass || "ac_active";
 	options.lineSeparator = options.lineSeparator || "\n";
 	options.cellSeparator = options.cellSeparator || "|";
 	options.minChars = options.minChars || 1;
@@ -402,5 +405,13 @@ jQuery(document).ready(function() {
 		var $input = jQuery("input[name='tx_indexedsearch[sword]']");
 	}
 	
-	$input.indexedsearchAutocomplete(top.location.origin + top.location.pathname + "?eID=cb_indexedsearch_autocomplete&sr=" + sr + "&sh=" + sh + "" + "&ll=" + ll, { minChars:3, matchSubset:1, matchContains:1, cacheLength:10, selectOnly:1 });
+	$input.indexedsearchAutocomplete(
+		top.location.origin + top.location.pathname + "?eID=cb_indexedsearch_autocomplete&sr=" + sr + "&sh=" + sh + "" + "&ll=" + ll,
+		{ 
+			minChars:3, 
+		 	matchSubset:1, 
+		 	matchContains:1, 
+		 	cacheLength:10, 
+		 	selectOnly:1 
+		});
 });

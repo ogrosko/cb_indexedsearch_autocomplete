@@ -1,45 +1,71 @@
 .ac_results {
-	background: #F5F5F5;
+	background: #fff;
 	width: 200px; /* This value is set in the javascript code, to match the width of the search box */
-	cursor: pointer;
 	position: absolute;
+	top: 0;
 	left: 0;
-	font-size: 90%;
 	z-index: 101;
 }
 .ac_results ul {
-	list-style-position: outside;
 	list-style: none;
 	padding: 0;
 	margin: 0;
-	border: 1px solid #AAAAAA;
+	-webkit-box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+	-moz-box-shadow:    0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+	box-shadow:         0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+	-webkit-border-bottom-right-radius: 8px;
+	-webkit-border-bottom-left-radius: 8px;
+	-moz-border-radius-bottomright: 8px;
+	-moz-border-radius-bottomleft: 8px;
+	border-bottom-right-radius: 8px;
+	border-bottom-left-radius: 8px;
+}
+
+.ac_results ul li {
+	cursor: pointer;
+	padding: 4px 30px 4px 20px;
 }
 
 .ac_results ul li.even {
-	background: #E5E5E5;
+	background: #fff;
 }
 
 .ac_results ul li.odd {
-	background: #FFFFFF;
+	background: #f5f5f5;
+}
+.ac_results ul li.over {
+	background-color: #A7CDF0;
+}
+
+.ac_results ul li:last-child {
+	-webkit-border-bottom-right-radius: 8px;
+	-webkit-border-bottom-left-radius: 8px;
+	-moz-border-radius-bottomright: 8px;
+	-moz-border-radius-bottomleft: 8px;
+	border-bottom-right-radius: 8px;
+	border-bottom-left-radius: 8px;
 }
 
 .ac_results iframe {
-	display:none;/*sorry for IE5*/
-	display/**/:block;/*sorry for IE5*/
-	position:absolute;
-	top:0;
-	left:0;
+	display:none;
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0,0,0,0);
+	border: 0;
 	z-index:-1;
 }
-.ac_results li {
-	padding: 2px 5px;
-}
 .ac_results a {
+	display: block;
 	width: 100%;
 }
 .ac_loading {
 	background:#FFFFFF url('../img/indicator.gif') no-repeat right center;
 }
-.over {
-	background-color: #A7CDF0 !important;
+.ac_input.ac_active {
+	position: relative;
+	z-index: 102;
 }
