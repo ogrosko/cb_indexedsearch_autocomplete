@@ -15,15 +15,8 @@ jQuery.indexedsearchAutocomplete = function(input, options) {
 	// Create jQuery object for results
 	var $results = jQuery(results);
 	// Set default values for results
-	var pos = findPos(input);
-
-	options.mustMatch = options.mustMatch || 0;
-
-	$results.hide().addClass(options.resultsClass).css({
-		position: "absolute",
-		top: ~~(pos.top + $input.outerHeight()) + "px",
-		left: ~~pos.left + "px"
-	});
+	
+	resetPos();
 	
 	// Lets see if we can find it
 	var readWidth = $input.outerWidth();
@@ -181,6 +174,7 @@ jQuery.indexedsearchAutocomplete = function(input, options) {
 			if (options.extensionConfig.autoResize)
 			{
 				resetSize(resultList);
+				resetPos();
 			}
 			$results.show();
 		} else {
@@ -257,6 +251,18 @@ jQuery.indexedsearchAutocomplete = function(input, options) {
 			jQuery(ul).width(widthNeeded);
 			$results.width(widthNeeded);
 		}
+	}
+	
+	function resetPos() {
+		var pos = findPos(input);
+
+		options.mustMatch = options.mustMatch || 0;
+
+		$results.hide().addClass(options.resultsClass).css({
+			position: "absolute",
+			top: ~~(pos.top + $input.outerHeight()) + "px",
+			left: ~~pos.left + "px"
+		});
 	}
 
 	function requestData(q) {

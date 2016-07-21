@@ -23,7 +23,7 @@
 
 .ac_results ul li {
 	cursor: pointer;
-	padding: 4px 30px 4px 20px;
+	padding: 4px;
 }
 
 .ac_results ul li.even {
